@@ -13,7 +13,6 @@ def check_sf(cards):
                 hand.append(card)
             if len(hand) == 5:
                 return hand, True
-
         
         # this proceeds the loop when if finds a pair
         elif hand[-1].face == card.face:
@@ -23,16 +22,19 @@ def check_sf(cards):
         else:
             hand = []
             hand.append(card)
+
     # print("This should print after the first check: ", cards)
     hand = []
     lowAce = {Face.ACE, Face.TWO, Face.THREE, Face.FOUR, Face.FIVE}
+    inhand = set()
     # hard coded low Ace check
     for card in cards:
-        if card.face in lowAce: 
-            if not hand or hand[-1].suit == card.suit:
-                hand.append(card)
+        if card.face in lowAce and card.face not in inhand:
+            hand.append(card)
+            inhand.add(card.face)
             if len(hand) == 5:
                 return hand, True
+
     # print("This should print at failure: ", cards)
     return cards, False
 
@@ -61,13 +63,12 @@ def check_straight(cards):
 
     hand = []
     lowAce = {Face.ACE, Face.TWO, Face.THREE, Face.FOUR, Face.FIVE}
+    inhand = set()
     # hard coded low Ace check
     for card in cards:
-        for i in range(len(hand)):
-            if card.face == hand[i].face:
-                i += 1
-        if card.face in lowAce:
+        if card.face in lowAce and card.face not in inhand:
             hand.append(card)
+            inhand.add(card.face)
             if len(hand) == 5:
                 return hand, True
 

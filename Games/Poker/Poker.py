@@ -38,6 +38,7 @@ def check_win(cards):
     cards, straightFlush = check_sf(cards)
     if straightFlush:
         print("Player has a straight flush")
+        print(cards)
         return True
 
 #   print("\nWe passed straight flush\n")
@@ -45,6 +46,7 @@ def check_win(cards):
     cards, pair = check_pair(cards)
 
     if pair == 4:
+        print("Player has a 4 of a kind")
         return True
 
 #   print("\nWe passed 4 of a kind\n")
@@ -54,6 +56,7 @@ def check_win(cards):
 
     if fullHouse:
         print("Player has a Full House")
+        print(cards)
         return True
 
 #   print("\nWe passed full house\n")
@@ -61,6 +64,7 @@ def check_win(cards):
     cards, straight = check_straight(cards)
 
     if straight:
+        print(cards)
         print("Player has a straight")
         return True
 
@@ -69,6 +73,7 @@ def check_win(cards):
     cards, flush = check_flush(cards)
 
     if flush:
+        print("Player has a flush")
         return True
     
 #   print("\nWe passed flush\n")
@@ -91,7 +96,7 @@ def check_win(cards):
         return True
     
 #   print("\nWe passed two pair\n")
-
+    print("\nPlayer has nothing\n")
     cards = sort_face(cards)
     print(f"Player has {str(cards[0].face)[5:].capitalize()} high") 
 
@@ -104,11 +109,13 @@ def main():
 
     print("\nDealing two hands of cards each...")
 
+    # hand1 = [Card(Face.EIGHT, Suit.CLUBS), Card(Face.NINE, Suit.DIAMONDS)]
+    # hand2 = [Card(Face.FIVE, Suit.SPADES), Card(Face.JACK, Suit.SPADES)]
+
     hand1 = deal_hand(deck)
-    # hand1 = [Card(Face.NINE, Suit.DIAMONDS)]
     hand2 = deal_hand(deck)
 
-    print("\nHand 1:", hand1)
+    # print("\nHand 1:", hand1)
     print("\nHand 2:", hand2)
 
     table = flop(deck)
@@ -116,9 +123,8 @@ def main():
     table.append(the_turn(deck))
 
     table.append(the_turn(deck))
-
-#   table = [Card(Face.TWO, Suit.HEARTS), Card(Face.FOUR, Suit.HEARTS), Card(Face.FIVE,
-#             Suit.HEARTS), Card(Face.ACE, Suit.HEARTS), Card(Face.THREE, Suit.HEARTS)]
+    
+    # table = [Card(Face.TEN, Suit.HEARTS), Card(Face.TWO, Suit.SPADES), Card(Face.TEN, Suit.SPADES), Card(Face.SEVEN, Suit.SPADES), Card(Face.EIGHT, Suit.DIAMONDS)]
 
     print("\nThe cards after the river:")
     print(table)
